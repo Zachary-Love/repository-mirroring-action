@@ -1,5 +1,5 @@
-name: "Mirroring Repository"
-description: "Mirror a repository to another repository on GitHub, GitLab, BitBucket, AWS CodeCommit, etc."
+name: "Mirror All Repos Big and Small"
+description: "Mirror a repository (LFS included) to another repository on GitHub, GitLab, BitBucket, AWS CodeCommit, etc."
 branding:
   icon: "archive"
   color: "blue"
