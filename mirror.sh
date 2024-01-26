@@ -9,7 +9,7 @@ git remote add mirror "$INPUT_TARGET_REPO_URL"
 # Check if the repository uses Git LFS
 if grep -q 'filter=lfs' .gitattributes; then
   # If it does, disable LFS locking verification for the mirror remote
-  git config lfs.$INPUT_TARGET_REPO_URL/info/lfs.locksverify false
+  git config lfs."$INPUT_TARGET_REPO_URL"/info/lfs.locksverify false
 
   # Fetch and push all LFS files
   git lfs fetch --all
