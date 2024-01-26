@@ -8,7 +8,7 @@ git remote add mirror "$INPUT_TARGET_REPO_URL"
 grep -q 'filter=lfs' .gitattributes
 export LFS_CHECK=$?
 # Check if the repository uses Git LFS
-if [ $LFS_CHECK -eq 0 ] then
+if [ $LFS_CHECK -eq 0 ]; then
   echo "Found LFS Repository"
   # If it does, disable LFS locking verification for the mirror remote
   git config lfs."$INPUT_TARGET_REPO_URL"/info/lfs.locksverify false
