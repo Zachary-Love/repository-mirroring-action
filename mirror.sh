@@ -8,14 +8,16 @@ git remote add mirror "$INPUT_TARGET_REPO_URL"
 
 # Check if the repository uses Git LFS
 if grep -q 'filter=lfs' .gitattributes; then
-  # If it does, use the appropriate commands to mirror the repo
-  git lfs install --local
+  # If it does, disable LFS locking verification for the mirror remote
+  git config lfs.$INPUT_TARGET_REPO_URL/info/lfs.locksverify false
+
+  # Fetch and push all LFS files
   git lfs fetch --all
   git lfs push --all mirror
-else
-  # If it doesn't, use the standard git commands to mirror the repo
-  git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
 fi
+
+# Push the Git history to the mirror repository
+git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
 
 # NOTE: Since `post` execution is not supported for local action from './' for now, we need to
 # run the command by hand.
