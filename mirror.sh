@@ -11,7 +11,7 @@ export LFS_CHECK=$?
 if [ $LFS_CHECK -eq 0 ]; then
   echo "Found LFS Repository"
 
-  HTTPS_REPO_URL=$(echo "$INPUT_TARGET_REPO_URL" | sed 's|ssh://|https://')
+  HTTPS_REPO_URL=$(echo "$INPUT_TARGET_REPO_URL" | sed 's/ssh:/https:/g')
 
   echo "Converted url: $HTTPS_REPO_URL"
   
