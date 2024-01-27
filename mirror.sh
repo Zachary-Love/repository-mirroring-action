@@ -10,13 +10,18 @@ export LFS_CHECK=$?
 # Check if the repository uses Git LFS
 if [ $LFS_CHECK -eq 0 ]; then
   echo "Found LFS Repository"
-  echo "$INPUT_TARGET_REPO_URL"
+
+  HTTPS_REPO_URL=$(echo "$INPUT_TARGET_REPO_URL" | sed 's|ssh://|https://')
+
+  echo "Converted url: $HTTPS_REPO_URL"
+  
   # If it does, disable LFS locking verification for the mirror remote
-  git config lfs."$INPUT_TARGET_REPO_URL"/info/lfs.locksverify false
+  git config lfs."$HTTPS_REPO_URL"/info/lfs.locksverify false
 
   # Fetch and push all LFS files
   echo "LFS Fetch"
   git lfs fetch --all
+  echo "LFS Push"
   git lfs push --all mirror
 fi
 
